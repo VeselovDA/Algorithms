@@ -8,11 +8,11 @@ public class Application {
     public static void main(String[] args) {
         System.out.println("Hello word!");
         //сортировка выбором
-        int[] forSortingByChoice=arrayForSort;
+        int[] forSortingByChoice=Arrays.copyOf(arrayForSort,arrayForSort.length);
         SortingUtils.sortingByChoice(forSortingByChoice);
         System.out.println(Arrays.toString(forSortingByChoice));
         //быстрая сортировка
-        forSortingByChoice=arrayForSort;
+        forSortingByChoice=Arrays.copyOf(arrayForSort,arrayForSort.length);
         SortingUtils.quickSort(forSortingByChoice,0,forSortingByChoice.length-1);
         System.out.println(Arrays.toString(forSortingByChoice));
 
