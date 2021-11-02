@@ -1,5 +1,12 @@
 package org.example.search;
 
+import java.util.Collections;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+
 public class SearchUtils {
 
     public static int binarySearch(int[]array,int desired){
@@ -19,4 +26,23 @@ public class SearchUtils {
         }
         return -1;//не найден элемент
     }
+
+    public static MyObjForWidthSearch widthSearch(MyObjForWidthSearch myObjForWidthSearch){
+        HashSet<MyObjForWidthSearch> searched=new HashSet<>();
+        Deque<MyObjForWidthSearch> deque = new LinkedList<>();
+        deque.add(myObjForWidthSearch);
+        while (!deque.isEmpty()){
+            MyObjForWidthSearch checked=deque.removeFirst();
+            if(!searched.contains(checked)) {
+                if (checked.isStatus()) return checked;
+                else {
+                    searched.add(checked);
+                    deque.addAll(List.of(checked.getSubArray()));
+                }
+            }
+        }
+        return null;
+    }
+
+
 }

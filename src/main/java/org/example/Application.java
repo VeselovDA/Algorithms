@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.search.MyObjForWidthSearch;
 import org.example.search.SearchUtils;
 import org.example.sorting.SortingUtils;
 import java.util.Arrays;
@@ -22,7 +23,22 @@ public class Application {
         System.out.println(Arrays.toString(forSortingByChoice));
         //бинарный поиск
         System.out.println(SearchUtils.binarySearch(forSortingByChoice,4));
+        //поиск в ширину
 
-
+        MyObjForWidthSearch found=SearchUtils.widthSearch(createTestDataForWidthSearch());
+        System.out.println(found==null?"не найден":found.getName());
+    }
+    //создание тестового экземпляра для поиска
+    private static MyObjForWidthSearch createTestDataForWidthSearch(){
+        MyObjForWidthSearch myObjForWidthSearch=new MyObjForWidthSearch("Dmitriy",false,
+                new MyObjForWidthSearch[]{
+                        new MyObjForWidthSearch("Petya", false, new MyObjForWidthSearch[]{}),
+                        new MyObjForWidthSearch("Vasya", false, new  MyObjForWidthSearch[]{
+                                new MyObjForWidthSearch("Natasha", true,  new MyObjForWidthSearch[]{})})
+                });
+        myObjForWidthSearch.getSubArray()[0]
+                .setSubArray(
+                        new MyObjForWidthSearch[]{myObjForWidthSearch});//для проверки зацикленности поиска в ширину
+        return myObjForWidthSearch;
     }
 }
