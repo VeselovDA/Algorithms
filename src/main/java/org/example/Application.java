@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.search.SearchUtils;
 import org.example.sorting.SortingUtils;
 import java.util.Arrays;
 
@@ -19,6 +20,9 @@ public class Application {
         forSortingByChoice=Arrays.copyOf(arrayForSort,arrayForSort.length);
         forSortingByChoice=SortingUtils.qSort(forSortingByChoice);
         System.out.println(Arrays.toString(forSortingByChoice));
+        //бинарный поиск
+        System.out.println(SearchUtils.binarySearch(forSortingByChoice,4));
+
 
     }
 }
