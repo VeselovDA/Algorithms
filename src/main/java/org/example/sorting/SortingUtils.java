@@ -1,5 +1,7 @@
 package org.example.sorting;
 
+import java.util.Arrays;
+
 public class SortingUtils {
 
     public static void sortingByChoice(int[] array) {
@@ -42,6 +44,39 @@ public class SortingUtils {
         }
         if (leftBorder < rightPointer) {
             quickSort(source, leftBorder, rightPointer);
+        }
+    }
+
+    public static int[] qSort(int[] array){
+        if(array.length<2){
+            return array;
+        } else {
+            int pivot=array[0];
+            int lessLength=0;
+            int greaterLength=0;
+            int[] less=new int[lessLength];
+            int[] greater=new int[greaterLength];
+
+            for(int i=1;i<array.length;i++) {
+                if(array[i]<=pivot){
+                    less=Arrays.copyOf(less,++lessLength);
+                    less[lessLength-1]=array[i];
+                } else {
+                    greater=Arrays.copyOf(greater,++greaterLength);
+                    greater[greaterLength-1]=array[i];
+                }
+            }
+            less=qSort(less);
+            greater=qSort(greater);
+            int [] result=new int[array.length];
+            for(int i=0;i<array.length;i++) {
+                if(i<lessLength)
+                    result[i]=less[i];
+                if(i>lessLength)
+                    result[i]=greater[i-lessLength-1];
+            }
+            result[lessLength]=pivot;
+            return  result;
         }
     }
 

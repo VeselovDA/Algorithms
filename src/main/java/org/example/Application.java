@@ -16,5 +16,9 @@ public class Application {
         SortingUtils.quickSort(forSortingByChoice,0,forSortingByChoice.length-1);
         System.out.println(Arrays.toString(forSortingByChoice));
 
+        forSortingByChoice=Arrays.copyOf(arrayForSort,arrayForSort.length);
+        forSortingByChoice=SortingUtils.qSort(forSortingByChoice);
+        System.out.println(Arrays.toString(forSortingByChoice));
+
     }
 }
