@@ -7,14 +7,22 @@ public class SortingUtils {
     public static void sortingByChoice(int[] array) {
 
         for (int leftIndex = 0; leftIndex < array.length; leftIndex++) {
-            int minIndex = leftIndex;
-            for (int currentInd = leftIndex; currentInd < array.length; currentInd++) {
-                if (array[currentInd] < array[minIndex]) {
-                    minIndex = currentInd;
+            int indexOfMinimumValue = leftIndex;
+            for (int currentIndex = leftIndex; currentIndex < array.length; currentIndex++) {
+                if (array[currentIndex] < array[indexOfMinimumValue]) {
+                    indexOfMinimumValue = currentIndex;
                 }
             }
-            swapInArray(array, leftIndex, minIndex);
+            swapValueInArray(array, leftIndex, indexOfMinimumValue);
         }
+    }
+
+    private  static void swapValueInArray(int[] array ,int swappedValueIndex1, int swappedValueIndex2){
+//      a= a xor b; b= b xor a; a= a xor b
+//      нельзя, если придут одинаковые значения, будут 0
+        int tmp = array[swappedValueIndex1];
+        array[swappedValueIndex1] = array[swappedValueIndex2];
+        array[swappedValueIndex2] = tmp;
     }
 
     public static void quickSort(int[] source, int leftBorder, int rightBorder) {
@@ -31,7 +39,7 @@ public class SortingUtils {
 
             if (leftMarker <= rightPointer) {
                 if (leftMarker < rightPointer) {
-                    swapInArray(source,leftMarker,rightPointer);
+                    swapValueInArray(source,leftMarker,rightPointer);
                 }
                 // сдвиг границ после выполненной операции
                 leftMarker++;
@@ -78,13 +86,5 @@ public class SortingUtils {
             result[lessLength]=pivot;
             return  result;
         }
-    }
-
-    private  static void swapInArray(int[] array ,int index, int nextIndex){
-//      a= a xor b; b= b xor a; a= a xor b
-//      нельзя, если придут одинаковые значения, будут 0
-        int tmp = array[index];
-        array[index] = array[nextIndex];
-        array[nextIndex] = tmp;
     }
 }

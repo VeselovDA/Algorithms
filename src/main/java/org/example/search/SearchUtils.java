@@ -1,9 +1,11 @@
 package org.example.search;
 
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class SearchUtils {
 
@@ -25,6 +27,7 @@ public class SearchUtils {
         return -1;//не найден элемент
     }
 
+    //этот алгоритм находит кратчайшее расстояние по количеству переходов между узлами
     public static MyObjForWidthSearch widthSearch(MyObjForWidthSearch myObjForWidthSearch){
         HashSet<MyObjForWidthSearch> searched=new HashSet<>();
         Deque<MyObjForWidthSearch> deque = new LinkedList<>();
