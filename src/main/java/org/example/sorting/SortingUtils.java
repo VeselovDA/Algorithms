@@ -17,7 +17,7 @@ public class SortingUtils {
         }
     }
 
-    private  static void swapValueInArray(int[] array ,int swappedValueIndex1, int swappedValueIndex2){
+    private static void swapValueInArray(int[] array, int swappedValueIndex1, int swappedValueIndex2) {
 //      a= a xor b; b= b xor a; a= a xor b
 //      нельзя, если придут одинаковые значения, будут 0
         int tmp = array[swappedValueIndex1];
@@ -25,7 +25,11 @@ public class SortingUtils {
         array[swappedValueIndex2] = tmp;
     }
 
-    public static void quickSort(int[] source, int leftBorder, int rightBorder) {
+    public static void quickSort(int[] source) {
+        quickSort(source, 0, source.length - 1);
+    }
+
+    private static void quickSort(int[] source, int leftBorder, int rightBorder) {
         int leftMarker = leftBorder;
         int rightPointer = rightBorder;
         int centerElement = source[(leftMarker + rightPointer) / 2];
@@ -39,7 +43,7 @@ public class SortingUtils {
 
             if (leftMarker <= rightPointer) {
                 if (leftMarker < rightPointer) {
-                    swapValueInArray(source,leftMarker,rightPointer);
+                    swapValueInArray(source, leftMarker, rightPointer);
                 }
                 // сдвиг границ после выполненной операции
                 leftMarker++;
@@ -55,36 +59,32 @@ public class SortingUtils {
         }
     }
 
-    public static int[] qSort(int[] array){
-        if(array.length<2){
-            return array;
-        } else {
-            int pivot=array[0];
-            int lessLength=0;
-            int greaterLength=0;
-            int[] less=new int[lessLength];
-            int[] greater=new int[greaterLength];
+    public static void qSort(int[] array) {
+        if (array.length > 1) {
+            int baseValue = array[0];
+            int leftSubArrayLength = 0;
+            int rightSubArrayLength = 0;
+            int[] leftSubArray = new int[leftSubArrayLength];
+            int[] rightSubArray = new int[rightSubArrayLength];
 
-            for(int i=1;i<array.length;i++) {
-                if(array[i]<=pivot){
-                    less=Arrays.copyOf(less,++lessLength);
-                    less[lessLength-1]=array[i];
+            for (int i = 1; i < array.length; i++) {
+                if (array[i] <= baseValue) {
+                    leftSubArray = Arrays.copyOf(leftSubArray, ++leftSubArrayLength);
+                    leftSubArray[leftSubArrayLength - 1] = array[i];
                 } else {
-                    greater=Arrays.copyOf(greater,++greaterLength);
-                    greater[greaterLength-1]=array[i];
+                    rightSubArray = Arrays.copyOf(rightSubArray, ++rightSubArrayLength);
+                    rightSubArray[rightSubArrayLength - 1] = array[i];
                 }
             }
-            less=qSort(less);
-            greater=qSort(greater);
-            int [] result=new int[array.length];
-            for(int i=0;i<array.length;i++) {
-                if(i<lessLength)
-                    result[i]=less[i];
-                if(i>lessLength)
-                    result[i]=greater[i-lessLength-1];
+            qSort(leftSubArray);
+            qSort(rightSubArray);
+            for (int i = 0; i < array.length; i++) {
+                if (i < leftSubArrayLength)
+                    array[i] = leftSubArray[i];
+                if (i > leftSubArrayLength)
+                    array[i] = rightSubArray[i - leftSubArrayLength - 1];
             }
-            result[lessLength]=pivot;
-            return  result;
+            array[leftSubArrayLength]=baseValue;
         }
     }
 }

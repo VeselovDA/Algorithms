@@ -15,16 +15,15 @@ public class Application {
         System.out.println(Arrays.toString(forSortingByChoice));
         //быстрая сортировка
         forSortingByChoice=Arrays.copyOf(arrayForSort,arrayForSort.length);
-        SortingUtils.quickSort(forSortingByChoice,0,forSortingByChoice.length-1);
+        SortingUtils.quickSort(forSortingByChoice);
         System.out.println(Arrays.toString(forSortingByChoice));
 
         forSortingByChoice=Arrays.copyOf(arrayForSort,arrayForSort.length);
-        forSortingByChoice=SortingUtils.qSort(forSortingByChoice);
+        SortingUtils.qSort(forSortingByChoice);
         System.out.println(Arrays.toString(forSortingByChoice));
         //бинарный поиск
         System.out.println(SearchUtils.binarySearch(forSortingByChoice,4));
         //поиск в ширину
-
         MyObjForWidthSearch found=SearchUtils.widthSearch(createTestDataForWidthSearch());
         System.out.println(found==null?"не найден":found.getName());
     }
