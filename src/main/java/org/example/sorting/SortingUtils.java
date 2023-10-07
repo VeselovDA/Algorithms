@@ -84,7 +84,16 @@ public class SortingUtils {
                 if (i > leftSubArrayLength)
                     array[i] = rightSubArray[i - leftSubArrayLength - 1];
             }
-            array[leftSubArrayLength]=baseValue;
+            array[leftSubArrayLength] = baseValue;
+        }
+    }
+
+    public static void bubbleSorting(int[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            if (array[i] > array[i + 1]) {
+                swapValueInArray(array, i, i + 1);
+                i = -1;
+            }
         }
     }
 }
