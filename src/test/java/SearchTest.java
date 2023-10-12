@@ -22,6 +22,23 @@ public class SearchTest {
         Assertions.assertEquals("Natasha",found.getName());
     }
 
+    @Test
+    @DisplayName("Алгоритм Дейкстры")
+    void SearchTest(){
+        Integer[][] matrix={
+                {null,2,6,null,null},
+                {null,null,null,1,null},
+                {null,null,null,1,1},
+                {null,null,null,null,5},
+                {null,null,null,null,null}
+        };
+        Assertions.assertEquals(7,SearchUtils.findShortestWay(matrix,0,4));
+        Assertions.assertEquals(6,SearchUtils.findShortestWay(matrix,0,2));
+        Assertions.assertEquals(3,SearchUtils.findShortestWay(matrix,0,3));
+        Assertions.assertEquals(1,SearchUtils.findShortestWay(matrix,2,4));
+        Assertions.assertEquals(5,SearchUtils.findShortestWay(matrix,3,4));
+    }
+
     private static MyObjForWidthSearch createTestDataForWidthSearch(){
         MyObjForWidthSearch myObjForWidthSearch=new MyObjForWidthSearch("Dmitriy",false,
                 new MyObjForWidthSearch[]{
@@ -34,4 +51,6 @@ public class SearchTest {
                         new MyObjForWidthSearch[]{myObjForWidthSearch});//для проверки зацикленности поиска в ширину
         return myObjForWidthSearch;
     }
+
+
 }
