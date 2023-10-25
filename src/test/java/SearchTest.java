@@ -46,5 +46,13 @@ public class SearchTest {
         Assertions.assertEquals(new BreadthFirstNode(6,2,0), SearchUtils.breadthFirstSearch(matrix, 0, integer -> integer > 5));
     }
 
+    @Test
+    @DisplayName("Наибольший общий делитель")
+    void findGreatestCommonDivisorTest() {
+        Assertions.assertEquals(1,SearchUtils.findGreatestCommonDivisor(3,7));
+        Assertions.assertEquals(3,SearchUtils.findGreatestCommonDivisor(3,6));
+        Assertions.assertEquals(3,SearchUtils.findGreatestCommonDivisor(6,3));
+        Assertions.assertEquals(6,SearchUtils.findGreatestCommonDivisor(48,42));
+    }
 
 }

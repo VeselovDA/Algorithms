@@ -1,12 +1,9 @@
 package org.example.search;
 
-import java.awt.*;
 import java.util.*;
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class SearchUtils {
 
@@ -30,26 +27,18 @@ public class SearchUtils {
 
     //этот алгоритм находит кратчайшее расстояние по количеству переходов между узлами
     public static BreadthFirstNode breadthFirstSearch(Integer[][] matrix, int start, Predicate<Integer> condition) {
-        var checked=new HashSet<BreadthFirstNode>();
-        var list=collectNeighbours(matrix,start,checked);
-        while(!list.isEmpty()){
-            var element=list.removeFirst();
+        var checked = new HashSet<BreadthFirstNode>();
+        var list = collectNeighbours(matrix, start, checked);
+        while (!list.isEmpty()) {
+            var element = list.removeFirst();
             checked.add(element);
             if (condition.test(element.getValue())) {
                 return element;
             } else {
-                list.addAll(collectNeighbours(matrix,element.getJ(),checked));
+                list.addAll(collectNeighbours(matrix, element.getJ(), checked));
             }
         }
         throw new RuntimeException("пути нет");
-    }
-
-    private static LinkedList<BreadthFirstNode>collectNeighbours(Integer[][] matrix,int target,Set<BreadthFirstNode> checked){
-        return IntStream.range(0,matrix[target].length)
-                .filter(j->Objects.nonNull(matrix[target][j]))
-                .mapToObj(j-> new BreadthFirstNode(matrix[target][j],target,j))
-                .filter(breadthFirstNode -> !checked.contains(breadthFirstNode))
-                .collect(Collectors.toCollection(LinkedList::new));
     }
 
 
@@ -89,6 +78,23 @@ public class SearchUtils {
 
         printMatrix(resultMatrix);
         return getResult(resultMatrix, finish);
+    }
+
+    public static int findGreatestCommonDivisor(int value1, int value2) {
+        while (value2 != 0) {
+            var remainder = value1 % value2;
+            value1 = value2;
+            value2 = remainder;
+        }
+        return value1;
+    }
+
+    private static LinkedList<BreadthFirstNode> collectNeighbours(Integer[][] matrix, int target, Set<BreadthFirstNode> checked) {
+        return IntStream.range(0, matrix[target].length)
+                .filter(j -> Objects.nonNull(matrix[target][j]))
+                .mapToObj(j -> new BreadthFirstNode(matrix[target][j], target, j))
+                .filter(breadthFirstNode -> !checked.contains(breadthFirstNode))
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 
     private static Integer getResult(Integer[][] resultMatrix, Integer finish) {
