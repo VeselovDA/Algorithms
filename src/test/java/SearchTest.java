@@ -4,6 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+
 public class SearchTest {
     private static final int[] sortedArray = {1, 2, 3, 5, 6, 7, 8, 9};
 
@@ -53,6 +57,14 @@ public class SearchTest {
         Assertions.assertEquals(3,SearchUtils.findGreatestCommonDivisor(3,6));
         Assertions.assertEquals(3,SearchUtils.findGreatestCommonDivisor(6,3));
         Assertions.assertEquals(6,SearchUtils.findGreatestCommonDivisor(48,42));
+    }
+
+    @Test
+    @DisplayName("Поиск простых множителей")
+    void findSimpleFactorTest() {
+        Assertions.assertTrue(Set.of(7,11).containsAll(SearchUtils.findSimpleFactors(77)));
+        Assertions.assertTrue(Set.of(2,11).containsAll(SearchUtils.findSimpleFactors(88)));
+        Assertions.assertTrue(Set.of(3,5,7).containsAll(SearchUtils.findSimpleFactors(105)));
     }
 
 }

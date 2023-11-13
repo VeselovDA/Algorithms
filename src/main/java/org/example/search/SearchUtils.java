@@ -89,6 +89,31 @@ public class SearchUtils {
         return value1;
     }
 
+    // не проверяем все четные числа потому что они по определению делятся на 2
+    // порог выбираем корнем квадратным от проверяемого значения потому что
+    //если n=p*q, то p и q не должны быть больше корня квадратного от n, иначе превысят n
+    public static Set<Integer> findSimpleFactors(int base) {
+        var simpleFactors = new HashSet<Integer>();
+        while (base % 2==0){
+            simpleFactors.add(2);
+            base/=2;
+        }
+        int odd=3;
+        int maxFactor=(int)Math.sqrt(base);
+        while (odd<=maxFactor){
+            while (base % odd ==0){
+                simpleFactors.add(odd);
+                base/=odd;
+                maxFactor=(int)Math.sqrt(base);
+            }
+            odd+=2;
+        }
+        if(base>1){
+            simpleFactors.add(base);
+        }
+        return simpleFactors;
+    }
+
     private static LinkedList<BreadthFirstNode> collectNeighbours(Integer[][] matrix, int target, Set<BreadthFirstNode> checked) {
         return IntStream.range(0, matrix[target].length)
                 .filter(j -> Objects.nonNull(matrix[target][j]))
@@ -144,7 +169,7 @@ public class SearchUtils {
 
     private static void checkValidInputMatrix(Integer[][] matrix) {
         if (matrix.length != matrix[0].length) {
-            throw new RuntimeException("Входный массив не является квадратной матрицей");
+            throw new RuntimeException("Входной массив не является квадратной матрицей");
         }
     }
 }
