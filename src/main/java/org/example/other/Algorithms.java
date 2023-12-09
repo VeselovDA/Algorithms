@@ -1,5 +1,10 @@
 package org.example.other;
 
+import java.math.BigInteger;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+
 public class Algorithms {
 
     public static long pow(int base, int degree) {
@@ -16,6 +21,40 @@ public class Algorithms {
         } else {
             return calculateDegreeNearestDegreeOfTwo(base, foundDegree) * pow(base, difference);
         }
+    }
+
+    // алгорит проверки числа на простото на основе малой теоремы Ферма
+    public static boolean checkPrimeNumber(int number) {
+        return checkPrimeNumber(number, number - 1);
+    }
+
+    public static boolean checkPrimeNumber(int number, int countTests) {
+        if (countTests >= number) {
+            throw new RuntimeException("Недопустимое значение количества проверок");
+        }
+        var random = new Random();
+        var processedWitness = new HashSet<Integer>();
+        for (int i = 0; i < countTests; i++) {
+            var randomWitness = random.nextInt(number);
+            while (processedWitness.contains(randomWitness) || randomWitness == 0) {
+                randomWitness = random.nextInt(number);
+            }
+            processedWitness.add(randomWitness);
+            if (checkWitnessByFerm(randomWitness, number)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean checkWitnessByFerm(int witness, int number) {
+        return bigIntPow(witness, number - 1)
+                .mod(new BigInteger(String.valueOf(number))).intValue() != 1;
+    }
+
+    private static BigInteger bigIntPow(int value, int powValue) {
+        BigInteger a = new BigInteger(String.valueOf(value));
+        return a.pow(powValue);
     }
 
     private static int findDegreeNearestDegreeOfTwo(int degree) {
